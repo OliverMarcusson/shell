@@ -7,7 +7,7 @@
 bool _cmd_in_commands(char *cmd) {
   const char *commands[] = {
       "echo",  "pwd", "ls", "cd", "man",  "cat",  "head",
-      "touch", "rm",  "cp", "mv", "help", "exit",
+      "touch", "rm",  "cp", "mv", "help", "exit", "clear",
   };
 
   size_t command_count = sizeof(commands) / sizeof(commands[0]);
