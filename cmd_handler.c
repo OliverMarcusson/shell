@@ -3,13 +3,13 @@
 #include "parser.h"
 #include "string_util.h"
 #include <dirent.h>
+#include <errno.h>
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <errno.h>
-#include <limits.h>
 
 void handle_command(ParseInfo *parse_info) {
   char *command = parse_info->argv[0];
@@ -62,10 +62,11 @@ void handle_command(ParseInfo *parse_info) {
     if (parse_info->argc == 1) {
       char *home = getenv("HOME");
       if (home == NULL) {
-        printf("WARN: HOME is not set, cannot change working directory to home directory.\n");
+        printf("WARN: HOME is not set, cannot change working directory to home "
+               "directory.\n");
         return;
       }
-      
+
       cd_cmd(home);
       return;
     }
@@ -134,7 +135,7 @@ void handle_command(ParseInfo *parse_info) {
       printf("ERROR: lines must be numerical.\n");
       return;
     }
-    
+
     head_cmd(parse_info->argv[1], lines);
   }
 

@@ -1,4 +1,3 @@
-#include "cmd_handler.h"
 #include "commands.h"
 #include "parser.h"
 #include "string_util.h"
@@ -23,8 +22,7 @@ const CommandInfo cmd_information[] = {
     {"touch", "Creates a new file."},
     {"help", "Displays the help message."},
     {"exit", "Exits the shell."},
-    {"clear", "Clears the console."}
-  };
+    {"clear", "Clears the console."}};
 
 const size_t cmd_info_len = sizeof(cmd_information) / sizeof(CommandInfo);
 
@@ -36,7 +34,9 @@ bool _is_command(char *token, char *command) {
 }
 
 bool _file_exists(char *path) {
-  if (access(path, F_OK) == 0) { return true; }
+  if (access(path, F_OK) == 0) {
+    return true;
+  }
   return false;
 }
 
@@ -95,7 +95,8 @@ void help_cmd() {
 
 void cd_cmd(char *path) {
   if (chdir(path) != 0) {
-    printf("ERROR: Could not change the working directory to the one specified.\n");
+    printf("ERROR: Could not change the working directory to the one "
+           "specified.\n");
   }
 }
 
@@ -119,7 +120,8 @@ void cat_cmd(char *path) {
 }
 
 void clear_cmd() {
-  printf("\033[2J\033[H"); // ANSI escape sequence to clear console and move cursor to the home position.
+  printf("\033[2J\033[H"); // ANSI escape sequence to clear console and move
+                           // cursor to the home position.
   fflush(stdout);
 }
 
@@ -131,10 +133,11 @@ void rm_cmd(char *path) {
 
 void mv_cmd(char *old_path, char *new_path) {
   if (_file_exists(new_path)) {
-    printf("ERROR: File with specified destination file name already exists.\n");
+    printf(
+        "ERROR: File with specified destination file name already exists.\n");
     return;
   }
-  
+
   if (rename(old_path, new_path) != 0) {
     printf("ERROR: Could not move/rename the file.\n");
   }
@@ -157,7 +160,7 @@ void touch_cmd(char *path) {
 }
 
 void head_cmd(char *path, size_t lines) {
-  if(!_file_exists(path)) {
+  if (!_file_exists(path)) {
     printf("ERROR: Specified file does not exist.\n");
     return;
   }
@@ -211,7 +214,8 @@ void cp_cmd(char *old_path, char *new_path) {
   int c;
   while ((c = fgetc(src)) != EOF) {
     if (fputc(c, dest) == EOF) {
-      printf("ERROR: Could not copy character from source file to destination file.\n");
+      printf("ERROR: Could not copy character from source file to destination "
+             "file.\n");
       fclose(src);
       fclose(dest);
       return;

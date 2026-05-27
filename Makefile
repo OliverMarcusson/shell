@@ -1,8 +1,12 @@
 CC=gcc
 CFLAGS= -Wall -Wextra
+SOURCE=main.c input.c parser.c string_util.c cmd_handler.c commands.c
 
-cmd: main.c input.c input.h parser.c parser.h string_util.c string_util.h cmd_handler.c cmd_handler.h commands.c commands.h
-	$(CC) $(CFLAGS) main.c input.c parser.c string_util.c cmd_handler.c commands.c -o cmd
+cmd:
+	$(CC) $(CFLAGS) $(SOURCE) -o cmd -lreadline
+
+cmd-readline:
+	$(CC) $(CFLAGS) -DUSE_GNU_READLINE $(SOURCE) -o cmd -lreadline
 
 clean:
 	rm -f cmd

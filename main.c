@@ -3,6 +3,7 @@
 #include "parser.h"
 #include <stdbool.h>
 #include <stddef.h>
+#include <stdio.h>
 
 #define INPUT_SIZE 1024
 #define MAX_ARGS 8
