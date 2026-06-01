@@ -1,5 +1,5 @@
 # shell
-This project is an implementation of a simple linux shell written completely in the C programming language. It is written as an assignment for the course `CH101U` from KTH.
+This project is an implementation of a simple POSIX-compliant shell written completely in the C programming language. It is written as an assignment for the course `CH101U` from KTH.
 
 ## Build
 ### Dependencies
